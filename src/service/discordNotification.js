@@ -8,14 +8,15 @@ async function sendDiscordNotification() {
   try {
     // Create a new embed message using EmbedBuilder
     const embed = new EmbedBuilder()
-    .setColor('#9146FF') // Twitch purple
-    .setTitle(`🎉 ${twitch.channel} is live!`)
-    .setDescription(status.title)
-    .addFields({ name: 'Watch Now', value: `[Click here to join the stream!](${status.url})` })
-    .setThumbnail('https://static-cdn.jtvnw.net/jtv_user_pictures/twitch-logo.png') // Optional: Twitch logo
-    .setImage(`https://static-cdn.jtvnw.net/previews-ttv/live_user_${twitch.channel}-1280x720.jpg`) // Twitch live thumbnail
-    .setFooter({ text: 'Powered by Twitch', iconURL: 'https://static-cdn.jtvnw.net/jtv_user_pictures/twitch-logo.png' })
-    .setTimestamp();
+      .setColor('#FF0000')  // Red color for live stream
+      .setTitle('🎉 Stream is Live! 🎉')
+      .setDescription(`Come join the fun! ${twitch.channel} is now live on Twitch!`)
+      .setURL(`https://www.twitch.tv/${twitch.channel}`)
+      .addFields({ name: 'Current Stream', value: '🎮 Watch the stream right now!' })
+      .setThumbnail('https://static-cdn.jtvnw.net/jtv_user_pictures/twitch-logo.png') // Optional: Twitch logo
+      .setImage(`https://static-cdn.jtvnw.net/previews-ttv/live_user_${twitch.channel}-1280x720.jpg`) // Twitch live thumbnail
+      .setTimestamp()
+      .setFooter({ text: 'Twitch Live Status' });
 
     // Send the embed message to the Discord channel
     const channel = await discordClient.channels.cache.get(discord.channelSchedule);
