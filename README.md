@@ -60,24 +60,27 @@ npm install
 
 4. Set up environment variables for Twitch and Discord integration. You will need:
 
-   // Stream Account
+// Stream Account
 
-   - `TWITCH_CLIENT_ID`
-   - `TWITCH_ACCESS_TOKEN`
-     // Bot Account
-   - `TWITCH_OAUTH_TOKEN`
-   - `TWITCH_BOT_USERNAME`
+- `TWITCH_CLIENT_ID`
+- `TWITCH_ACCESS_TOKEN`
+  // Bot Account
+- `TWITCH_OAUTH_TOKEN`
+- `TWITCH_BOT_USERNAME`
+- `TWITCH_CHANNEL`
 
-   - `TWITCH_CHANNEL`
-     // Discord Bot and Channel
-   - `DISCORD_BOT_TOKEN`
-   - `DISCORD_CHANNEL_SCHEDULE`
-     // Database
-   - `DATABASE_HOST`
-   - `DATABASE_PORT`
-   - `DATABASE_USER`
-   - `DATABASE_PASSWORD`
-   - `DATABASE_NAME`
+// Discord Bot and Channel
+
+- `DISCORD_BOT_TOKEN`
+- `DISCORD_CHANNEL_SCHEDULE`
+
+// Database
+
+- `DATABASE_HOST`
+- `DATABASE_PORT`
+- `DATABASE_USER`
+- `DATABASE_PASSWORD`
+- `DATABASE_NAME`
 
 ---
 
@@ -132,9 +135,4 @@ Happy gaming, and may the points be ever in your favor! 🎮✨
 
 ```
 
-### What's Changed:
-- **Cosmetics Shop Section**: Now mentions that users can unlock exclusive cosmetics for games like *Sea of Thieves*, such as the Oreo Ship Set.
-- **Game Cosmetics**: Emphasized that the rewards are game-specific, not just Discord cosmetics, to fit your needs better.
-
-Let me know if you'd like any further adjustments!
 ```

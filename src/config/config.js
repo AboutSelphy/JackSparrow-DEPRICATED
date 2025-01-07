@@ -10,13 +10,9 @@ module.exports = {
     },
     discord: {
         botToken: process.env.DISCORD_BOT_TOKEN,
-        channelId: process.env.DISCORD_CHANNEL_ID,
+        channelSchedule: process.env.DISCORD_CHANNEL_SCHEDULE,
     },
     database: {
-        host: process.env.DATABASE_HOST,      // e.g., 'localhost'
-        port: process.env.DATABASE_PORT,      // e.g., '3306'
-        username: process.env.DATABASE_USER,  // Database username
-        password: process.env.DATABASE_PASSWORD,  // Database password
-        database: process.env.DATABASE_NAME,  // Database name
+        url: process.env.DATABASE_URL// Database name
     },
 };
