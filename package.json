@@ -1,0 +1,22 @@
+{
+  "name": "jack_sparrow_bot",
+  "version": "1.0.0",
+  "description": "Twitch & Discord Bot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "author": "AboutSelphy",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "discord.js": "^14.17.2",
+    "dotenv": "^16.4.7",
+    "mariadb": "^3.4.0",
+    "nodemon": "^3.1.9",
+    "sequelize": "^6.37.5",
+    "tmi.js": "^1.8.5",
+    "winston": "^3.17.0"
+  }
+}
