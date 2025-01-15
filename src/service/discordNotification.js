@@ -1,7 +1,9 @@
 const { EmbedBuilder } = require('discord.js');  // For Discord embed
 const { discord, twitch } = require('../config/config'); // Import the config file
-const discordClient = require('../config/discord');
+const { discordClient } = require('../config/discord');
 const { checkStreamLiveStatus, shouldSendDiscordNotification } = require('../event/livestatus'); // Import the stream status functions
+
+let hasSentNotification = false;  // Track if the notification has been sent
 
 // Function to send a Discord notification with an embed
 async function sendDiscordNotification() {
@@ -38,20 +40,28 @@ setInterval(async () => {
     console.log(`Stream live status: ${isLive ? 'Live' : 'Offline'}`); // Log stream status
 
     if (isLive) {
-      console.log('✅ Stream is live!');
-      
-      // Log the notification decision
-      const sendNotification = await shouldSendDiscordNotification(); // Check if notification should be sent
-      console.log(`Should send notification: ${sendNotification}`);  // Debugging line
+      if (!hasSentNotification) { // Only send the notification once when the stream goes live
+        console.log('✅ Stream is live!');
+        
+        // Log the notification decision
+        const sendNotification = await shouldSendDiscordNotification(); // Check if notification should be sent
+        console.log(`Should send notification: ${sendNotification}`);  // Debugging line
 
-      if (sendNotification) {
-        console.log('Sending Discord notification...');
-        await sendDiscordNotification();  // Send the embedded message
+        if (sendNotification) {
+          console.log('Sending Discord notification...');
+          await sendDiscordNotification();  // Send the embedded message
+          hasSentNotification = true;  // Set flag to true, so notification won't be sent again until stream goes offline
+        }
       }
     } else {
-      console.log('❌ Stream is offline');
+      if (hasSentNotification) {
+        console.log('❌ Stream is offline');
+        hasSentNotification = false;  // Reset the flag when stream goes offline
+      }
     }
   } catch (error) {
     console.error('❌ Error checking stream status:', error.message);
   }
 }, 60000);  // Check every minute (60000ms)
+
+module.exports = { sendDiscordNotification }; 

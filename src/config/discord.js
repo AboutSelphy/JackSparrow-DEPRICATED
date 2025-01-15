@@ -11,4 +11,16 @@ const discordClient = new Client({
 });
 
 discordClient.login(discord.botToken);  // Log in using the bot token from your config
-module.exports = discordClient;          // Export the client instance
+
+async function connectDiscord() {
+  try {
+    await discordClient.login(process.env.DISCORD_BOT_TOKEN);  // Ensure the token is correct
+    console.log('✅ Discord bot is online!');
+  } catch (error) {
+    console.error('❌ Discord client login failed:', error.message);
+    throw error; // Stop execution on error
+  }
+}
+
+// Export the client and the connect function
+module.exports = { discordClient, connectDiscord };

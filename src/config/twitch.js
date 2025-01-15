@@ -11,4 +11,15 @@ const twitchClient = new tmi.Client({
     channels: [twitch.channel],
 });
 
-module.exports = twitchClient;
+// Connect the client
+async function connectTwitch() {
+    try {
+      await twitchClient.connect(); // This will initiate the connection to Twitch
+      console.log('✅ Twitch client connected!');
+    } catch (error) {
+      console.error('❌ Twitch client connection failed:', error.message);
+      throw error; // Stop execution on error
+    }
+  }
+  
+  module.exports = { twitchClient, connectTwitch };
