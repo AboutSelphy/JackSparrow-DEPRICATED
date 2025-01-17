@@ -39,29 +39,25 @@ setInterval(async () => {
     const isLive = await checkStreamLiveStatus(); // Check if the stream is live
     console.log(`Stream live status: ${isLive ? 'Live' : 'Offline'}`); // Log stream status
 
-    if (isLive) {
-      if (!hasSentNotification) { // Only send the notification once when the stream goes live
-        console.log('✅ Stream is live!');
-        
-        // Log the notification decision
-        const sendNotification = await shouldSendDiscordNotification(); // Check if notification should be sent
-        console.log(`Should send notification: ${sendNotification}`);  // Debugging line
+    if (isLive && !hasSentNotification) { // Only send the notification once when the stream goes live
+      console.log('✅ Stream is live!');
+      
+      // Log the notification decision
+      const sendNotification = await shouldSendDiscordNotification(); // Check if notification should be sent
+      console.log(`Should send notification: ${sendNotification}`);  // Debugging line
 
-        if (sendNotification) {
-          console.log('Sending Discord notification...');
-          await sendDiscordNotification();  // Send the embedded message
-          hasSentNotification = true;  // Set flag to true, so notification won't be sent again until stream goes offline
-        }
+      if (sendNotification) {
+        console.log('Sending Discord notification...');
+        await sendDiscordNotification();  // Send the embedded message
+        hasSentNotification = true;  // Set flag to true, so notification won't be sent again until stream goes offline
       }
-    } else {
-      if (hasSentNotification) {
-        console.log('❌ Stream is offline');
-        hasSentNotification = false;  // Reset the flag when stream goes offline
-      }
+    } else if (!isLive && hasSentNotification) {
+      console.log('❌ Stream is offline');
+      hasSentNotification = false;  // Reset the flag when stream goes offline, enabling future notifications
     }
   } catch (error) {
     console.error('❌ Error checking stream status:', error.message);
   }
 }, 60000);  // Check every minute (60000ms)
 
-module.exports = { sendDiscordNotification }; 
+module.exports = { sendDiscordNotification };

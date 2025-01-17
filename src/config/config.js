@@ -3,6 +3,7 @@ require('dotenv').config();
 module.exports = {
     twitch: {
         clientId: process.env.TWITCH_CLIENT_ID,
+        botId: process.env.TWITCH_BOT_ID,
         accessToken: process.env.TWITCH_ACCESS_TOKEN,
         oauthToken: process.env.TWITCH_OAUTH_TOKEN,
         botUsername: process.env.TWITCH_BOT_USERNAME,

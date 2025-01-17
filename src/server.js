@@ -7,6 +7,7 @@ const { connectTwitch } = require('./config/twitch');
 
 // note: import functions
 const { sendDiscordNotification } = require('./service/discordNotification')
+const { trackPoints } = require('./service/pointTracker')
 
 // Initialize Database
 async function initializeDatabase() {
@@ -58,6 +59,10 @@ async function startBot() {
         await initializeDiscord();
 
         sendDiscordNotification();
+
+        trackPoints();
+
+
 
         console.log('✅ Bot is fully initialized and running!');
     } catch (error) {
