@@ -46,7 +46,7 @@ async function updateSubscriptionTier(username, user) {
     const response = await axios.get('https://api.twitch.tv/helix/subscriptions', {
       headers: {
         'Client-ID': twitch.clientId,
-        'Authorization': `Bearer ${twitch.oauthToken}`,
+        'Authorization': `Bearer ${twitch.accessToken}`,
       },
       params: {
         broadcaster_id: broadcasterInfo.userId,
