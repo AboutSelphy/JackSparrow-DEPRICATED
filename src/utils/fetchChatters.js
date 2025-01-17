@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { twitch } = require('../config/config'); // Configuration for Twitch API
-const User = require('../models/User'); // User model
+const User = require('../models/user'); // User model
 const { isBlacklisted } = require('../utils/blacklist'); // Import blacklist functions
 
 // Fetches the user ID and profile picture URL for a given username using Twitch Helix API

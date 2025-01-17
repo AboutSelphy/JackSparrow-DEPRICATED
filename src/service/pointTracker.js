@@ -1,6 +1,6 @@
 // event/pointTracking.js
 const { fetchChatters } = require('../utils/fetchChatters'); // Import the fetchChatters function
-const User = require('../models/User'); // Import the User model
+const User = require('../models/user'); // Import the User model
 const { canCollectPoints } = require('../event/livestatus'); // Check if stream is live
 const { isBlacklisted } = require('../utils/blacklist'); // Import the blacklist check function
 
