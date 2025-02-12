@@ -71,7 +71,7 @@ async function startBot() {
         // Step 3: Initialize Discord bot
         await initializeDiscord();
 
-
+        
 
 
         console.log('✅ Bot is fully initialized and running!');
@@ -89,9 +89,15 @@ startBot();
 app.use(bodyParser.json()); // Use body parser to handle JSON requests
 app.use(express.json({ verify: (req, res, buf) => { req.rawBody = buf.toString(); }})); // Store raw body
 
+app.post('/eventsub', (req, res) => {
+    console.log('🔔 Received Twitch EventSub:', req.body);
+    res.sendStatus(200); // Acknowledge receipt
+});
+
+
 // Use routes
-app.use('/events', streamOnlineRoute); // Make sure the routes are used correctly
-app.use('/events', streamOfflineRoute); // Use the correct path for both online and offline routes
+app.use('/eventsub', streamOnlineRoute); // Make sure the routes are used correctly
+app.use('/eventssub', streamOfflineRoute); // Use the correct path for both online and offline routes
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
