@@ -6,7 +6,7 @@ const { discordClient } = require('./config/discord');
 const { connectTwitch } = require('./config/twitch');
 
 // note: import functions
-const eventHandler = require('./event/eventHandler');
+// const eventHandler = require('./event/eventHandler');
 
 
 
