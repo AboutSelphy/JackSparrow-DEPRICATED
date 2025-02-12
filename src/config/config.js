@@ -6,8 +6,10 @@ module.exports = {
         botId: process.env.TWITCH_BOT_ID,
         accessToken: process.env.TWITCH_ACCESS_TOKEN,
         oauthToken: process.env.TWITCH_OAUTH_TOKEN,
+        eventSubUrl: process.env.EVENTSUB_CALLBACK_URL,
         botUsername: process.env.TWITCH_BOT_USERNAME,
         channel: process.env.TWITCH_CHANNEL,
+        secret: process.env.TWITCH_SECRET,
     },
     discord: {
         botToken: process.env.DISCORD_BOT_TOKEN,

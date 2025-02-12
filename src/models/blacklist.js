@@ -14,4 +14,13 @@ const Blacklist = sequelize.define('Blacklist', {
   },
 });
 
+(async () => {
+  try {
+    await sequelize.sync();
+    console.log('✅ Blacklist table synced successfully');
+  } catch (error) {
+    console.error('❌ Error syncing User table:', error.message);
+  }
+})();
+
 module.exports = { Blacklist };

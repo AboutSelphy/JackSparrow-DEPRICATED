@@ -6,8 +6,21 @@ const { discordClient } = require('./config/discord');
 const { connectTwitch } = require('./config/twitch');
 
 // note: import functions
-const { sendDiscordNotification } = require('./service/discordNotification')
-const { trackPoints } = require('./service/pointTracker')
+const eventHandler = require('./event/eventHandler');
+
+
+
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+// Import routes (make sure you use the correct file paths)
+const streamOnlineRoute = require('./event/streamOnline');
+const streamOfflineRoute = require('./event/streamOffline');
+
+const PORT = 3000;
+
+
 
 // Initialize Database
 async function initializeDatabase() {
@@ -58,9 +71,6 @@ async function startBot() {
         // Step 3: Initialize Discord bot
         await initializeDiscord();
 
-        sendDiscordNotification();
-
-        trackPoints();
 
 
 
@@ -73,3 +83,17 @@ async function startBot() {
 
 // Start the bot
 startBot();
+
+
+// Middleware
+app.use(bodyParser.json()); // Use body parser to handle JSON requests
+app.use(express.json({ verify: (req, res, buf) => { req.rawBody = buf.toString(); }})); // Store raw body
+
+// Use routes
+app.use('/events', streamOnlineRoute); // Make sure the routes are used correctly
+app.use('/events', streamOfflineRoute); // Use the correct path for both online and offline routes
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server running on port ${PORT}`);
+});
