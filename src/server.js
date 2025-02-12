@@ -97,7 +97,7 @@ app.post('/eventsub', (req, res) => {
 
 // Use routes
 app.use('/eventsub', streamOnlineRoute); // Make sure the routes are used correctly
-app.use('/eventssub', streamOfflineRoute); // Use the correct path for both online and offline routes
+app.use('/eventsub', streamOfflineRoute); // Use the correct path for both online and offline routes
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
