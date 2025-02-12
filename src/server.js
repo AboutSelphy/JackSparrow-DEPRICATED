@@ -18,7 +18,6 @@ const bodyParser = require('body-parser');
 const streamOnlineRoute = require('./event/streamOnline');
 const streamOfflineRoute = require('./event/streamOffline');
 
-const PORT = 3000;
 
 
 
@@ -98,8 +97,3 @@ app.post('/eventsub', (req, res) => {
 // Use routes
 app.use('/eventsub', streamOnlineRoute); // Make sure the routes are used correctly
 app.use('/eventsub', streamOfflineRoute); // Use the correct path for both online and offline routes
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server running on port ${PORT}`);
-});
