@@ -4,6 +4,7 @@ module.exports = {
     twitch: {
         clientId: process.env.TWITCH_CLIENT_ID,
         botId: process.env.TWITCH_BOT_ID,
+        broadcastId: process.env.TWITCH_BROADCAST_USERID,
         accessToken: process.env.TWITCH_ACCESS_TOKEN,
         oauthToken: process.env.TWITCH_OAUTH_TOKEN,
         eventSubUrl: process.env.EVENTSUB_CALLBACK_URL,
