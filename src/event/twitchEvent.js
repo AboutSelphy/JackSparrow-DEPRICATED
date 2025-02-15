@@ -6,11 +6,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.TWITCH_EVENTSUB_PORT || 3001;
-const TWITCH_CALLBACK_URL = process.env.EVENTSUB_CALLBACK_URL;
-const TWITCH_CLIENT_ID = twitch.clientId;
-const TWITCH_CLIENT_SECRET = twitch.secret;
-const TWITCH_BEARER_TOKEN = twitch.bearerToken;
-const TWITCH_USER_ID = twitch.broadcastId; // Get this manually
+
 
 // Middleware to capture raw request body for signature validation
 app.use(express.json({
