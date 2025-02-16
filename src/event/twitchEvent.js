@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
 const { twitch } = require('../config/config');
+const { handleStreamEvent } = require('./eventHandler');
 require('dotenv').config();
 
 const app = express();
@@ -41,27 +42,6 @@ function verifyTwitchSignature(req) {
     }
     return isValid;
 }
-
-// Event handler for stream status
-function handleStreamEvent(event) {
-    const eventType = event.event.type;
-
-    switch (eventType) {
-        case 'live': // Add case for 'live' event type
-            console.log(`🎥 ${event.event.broadcaster_user_name} is now live!`);
-            // Implement any logic when stream goes online, e.g., notify Discord, log, etc.
-            break;
-
-        case 'stream.offline':
-            console.log(`⛔ ${event.event.broadcaster_name} is now offline.`);
-            // Implement any logic when stream goes offline
-            break;
-
-        default:
-            console.log(`⚠️ Unknown event type: ${eventType}`);
-    }
-}
-
 app.post('/eventsub', (req, res) => {
     if (req.body.challenge) {
         console.log('🔄 Received Twitch challenge, responding...');
@@ -76,17 +56,15 @@ app.post('/eventsub', (req, res) => {
     }
 
     console.log('✅ Verified Event Received:', req.body);
-
-    // Event Handling Logic
-    const event = req.body;
-    handleStreamEvent(event); // Pass event to handler
-
+    handleStreamEvent(req.body); // Call the event handler
     res.sendStatus(200);
 });
 
 // Export the server so it can be used in server.js
-module.exports.listen = function() {
+function startTwitchEventListener() {
     app.listen(PORT, () => {
-        console.log(`✅ Twitch EventSub webhook listening on port ${PORT}`);
+        console.log(`🎧 Twitch EventSub listening on port ${PORT}`);
     });
-};
+}
+
+module.exports = { startTwitchEventListener };
