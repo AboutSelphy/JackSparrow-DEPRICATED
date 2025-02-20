@@ -3,9 +3,11 @@ require('dotenv').config(); // Load environment variables from .env
 const { connectDatabase } = require('./config/database');
 const { discordClient } = require('./config/discord');
 const { connectTwitch } = require('./config/twitch');
+const { connectEventSub } = require('./event/twitchEventSub');
+
 
 // Import the Express server for Twitch EventSub handling
-const { startTwitchEventListener } = require('./event/twitchEvent');
+// const { startTwitchEventListener } = require('./event/twitchEvent');
 
 // Initialize Database
 async function initializeDatabase() {
@@ -42,6 +44,7 @@ async function initializeDiscord() {
     }
 }
 
+
 // Start all services
 async function startBot() {
     try {
@@ -50,7 +53,9 @@ async function startBot() {
         await initializeTwitch();
         await initializeDiscord();
 
-        startTwitchEventListener(); // Starts the Twitch event listener
+        await connectEventSub(); // 🔥 Added EventSub WebSocket Connection
+
+        // startTwitchEventListener(); // Starts the Twitch event listener
         console.log('✅ Bot is fully initialized and running!');
     } catch (error) {
         console.error('❌ Fatal error during bot initialization:', error.message);
